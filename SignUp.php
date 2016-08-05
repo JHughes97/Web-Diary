@@ -82,6 +82,7 @@
 			<br><br>
 			<input type="text" name="password2" placeholder="re-enter password">
 			<br><br>
+			<input type="submit" class="b" name="return" value="Return" formaction="WelcomePage.php">
 			<input type="submit" class="b" name="submit" value="Sign Up">
 		</form>
 

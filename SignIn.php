@@ -79,6 +79,7 @@
 			<br><br>
 			<input type="password" name="password" placeholder="enter password"><br>
 			<span class="error"><?php echo $passwordError; ?><br><br>
+			<input type="submit" class="b" name="return" value="Return" formaction="WelcomePage.php">
 			<input type="submit" class="b" name="submit" value="Sign In">
 		</form>
 
