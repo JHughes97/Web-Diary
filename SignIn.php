@@ -36,7 +36,7 @@
 
 			if($result === false){
 
-				echo "*Error retrieving data from database";
+				echo "Error retrieving data from database";
 
 			}else{
 
@@ -58,7 +58,7 @@
 				}else{
 					$conn->close();
 
-					$passwordError = "Incorrect username and/or password";
+					$passwordError = "*Incorrect username and/or password";
 				}
 
 			}

@@ -16,54 +16,69 @@
 
 	<div id="main">
 
-		<form action="DiaryEntry.php" method="GET">
-			<input type="submit" name="Submit" value="New Entry" class="b">
+		<form id="aForm" method="GET">
+			<input type="submit" name="SignOut" value="Sign Out" formaction="WelcomePage.php" class="b">
+			<input type="submit" name="Entry" value="New Entry" formaction="DiaryEntry.php" class="b">
 		</form>
 
 		<br><br>
 		
 		<?php
 
-			//Create connection to the MySQL server
-			$servername = "localhost";
-			$username = "pawn";
-			$password = "pawnpass";
-			$dbname = "myDB";
+			if(!isset($_COOKIE["name"])){
 
-			$conn = new mysqli($servername, $username, $password, $dbname);
+				echo '<script language="javascript">
+						alert("Session has timed out");
+						</script>';
 
-			if($conn->connect_error){
-				die("Connection failed: ".$conn->connect_error);
-			}
+				echo '<script language="javascript">
+						window.location.href="SignIn.php";
+						</script>';
 
-			//Create and execute query
-			$sql = "SELECT * FROM WebDiary";
+			}else{
+				//Create connection to the MySQL server
+				$servername = "localhost";
+				$username = "pawn";
+				$password = "pawnpass";
+				$dbname = "DiaryDB";
 
-			$result = $conn->query($sql);
+				$conn = new mysqli($servername, $username, $password, $dbname);
 
-			//Create and print table of selected data
-			if($result !== false){
-				$html_table = '<table align="center" border="1" cellspacing="0" cellpadding="2" style="maxwidth:50px"><tr><th><span>When/Where</span></th><th><span>Event</span></th><th><span>Emotion</span></th><th><span>AutomaticThoughts</span></th><th><span>RationalResponse</span></th></tr>';
-
-				foreach($result as $row){
-					$one = formatText($row['Location']);
-					$two = formatText($row['Event']);
-					$three = formatText($row['Emotion']);
-					$four = formatText($row['AutomaticThoughts']);
-					$five = formatText($row['RationalResponse']);
-
-					$html_table .= '<tr><td>' .$one. '</td><td>' .$two. '</td><td>' .$three. '</td><td>' .$four. '</td><td>' .$five. '</td></tr>';
+				if($conn->connect_error){
+					die("Connection failed: ".$conn->connect_error);
 				}
 
-				$html_table .= '</table>';
+				//Create and execute query
+				$sql = "SELECT * FROM WebDiary
+						WHERE Username = '" . $_COOKIE["name"] . "'";
 
-				echo $html_table;
-			}else{
-				echo "Error displaying table: " . $conn->error;
+				$result = $conn->query($sql);
+
+				//Create and print table of selected data
+				if($result !== false){
+					$html_table = '<table align="center" border="1" cellspacing="0" cellpadding="2" style="maxwidth:50px"><tr><th><span>When/Where</span></th><th><span>Event</span></th><th><span>Emotion</span></th><th><span>AutomaticThoughts</span></th><th><span>RationalResponse</span></th></tr>';
+
+					foreach($result as $row){
+						$one = formatText($row['Location']);
+						$two = formatText($row['Event']);
+						$three = formatText($row['Emotion']);
+						$four = formatText($row['AutomaticThoughts']);
+						$five = formatText($row['RationalResponse']);
+
+						$html_table .= '<tr><td>' .$one. '</td><td>' .$two. '</td><td>' .$three. '</td><td>' .$four. '</td><td>' .$five. '</td></tr>';
+					}
+
+					$html_table .= '</table>';
+
+					echo $html_table;
+				}else{
+					echo "Error displaying table: " . $conn->error;
+				}
+
+				//Close connection
+				$conn->close();
+
 			}
-
-			//Close connection
-			$conn->close();
 
 			//Function adds new line break after every 35 characters
 			function formatText($data){

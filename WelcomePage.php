@@ -6,6 +6,14 @@
 </head>
 <body>
 
+
+	<?php
+
+		//delete username cookie
+		setcookie("name","",1);
+
+	?>
+
 	<div id="header">
 		Web Diary
 	</div>

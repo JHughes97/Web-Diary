@@ -9,6 +9,21 @@
 </head>
 <body>
 
+	<?php
+
+		if(!isset($_COOKIE["name"])){
+			echo '<script language="javascript">
+					alert("Session has timed out");
+					</script>';
+
+			echo '<script language="javascript">
+					window.location.href="SignIn.php";
+					</script>';
+
+		}
+
+	?>
+
 	<div id="header">
 		Web Diary
 	</div>
@@ -43,8 +58,9 @@
 		</form>
 		<br>
 
-		<form id="myForm2" action="ShowDiary.php" method="GET">
-			<input type="submit" name="Submit" value="ShowDiary" class="b">	
+		<form id="myForm2" method="GET">
+			<input type="submit" name="SignOut" value="Sign Out" class="b" formaction="WelcomePage.php">
+			<input type="submit" name="Show" value="ShowDiary" class="b" formaction="ShowDiary.php">	
 		</form>
 
 		<div id="info" class="out">

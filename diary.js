@@ -14,4 +14,23 @@ function validateForm(formName,divName){
 	}else{
 		return true;
 	}
+
+}
+
+function signUpValidate(formName){
+
+	var elements = document.forms[formName];
+
+	if(elements["username"].length < 1 || elements["username"].length > 14){
+		alert("Username must be between 1 and 14 characters");
+		return false;
+	}
+
+	if(elements["password"].localeCompare(elements["password2"]) != 0){
+		alert("Passwords do not match");
+		return false;
+	}
+
+	return true;
+
 }
