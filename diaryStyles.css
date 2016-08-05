@@ -12,9 +12,16 @@ body{
 	text-align: center;
 	overflow-x: auto;
 }
-input[type=text]{
+.centered{
+	position:fixed; top: 50%; left: 50%; width:22em;
+    height:12em; margin-top: -5em; margin-left: -11em;
+    border: 10px solid red; background-color: #ff8080;
+    text-align: center; border-radius: 20%;
+    box-shadow: 10px 10px 5px #ff8080;
+}
+input{
 	border: 2px solid #ee4444;
-	border-radius: 4px; width: 50px;
+	border-radius: 4px; width: 140px;
 }
 p{
 	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -75,4 +82,7 @@ th{
 td{
 	vertical-align: top; padding: 8px; font-size: 13px; width: 13%;
 	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.error{
+	color: #FF0000; font-size: 12px;
 }
